@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For My Husband ❤️</title>
+
+<style>
+body {
+  margin:0;
+  font-family: 'Segoe UI', sans-serif;
+  background: black;
+  color: white;
+  text-align: center;
+  overflow-x: hidden;
+}
+
+.hidden { display:none; }
+
+button {
+  padding: 12px 22px;
+  font-size: 16px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(45deg, pink, red);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 0 10px pink;
+}
+
+.fade { animation: fadeIn 2s; }
+
+@keyframes fadeIn {
+  from {opacity:0;}
+  to {opacity:1;}
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  bottom: -10px;
+  color: red;
+  font-size: 20px;
+  animation: floatUp 5s linear infinite;
+}
+
+@keyframes floatUp {
+  0% {transform: translateY(0);}
+  100% {transform: translateY(-100vh);}
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Background Music -->
+<audio autoplay loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<!-- STEP 1 -->
+<div id="start" class="fade">
+  <h2 id="typing"></h2>
+  <button onclick="next1()">Start My Love ❤️</button>
+</div>
+
+<!-- STEP 2 PASSWORD -->
+<div id="lock" class="hidden fade">
+  <h2>Only my husband can unlock this 💖</h2>
+  <input type="password" id="pass" placeholder="Enter password">
+  <br><br>
+  <button onclick="check()">Unlock</button>
+  <p id="error"></p>
+</div>
+
+<!-- MAIN -->
+<div id="main" class="hidden fade">
+  <h2>Happy Birthday My Husband ❤️</h2>
+
+  <p>Miles apart… but always in my heart 💕</p>
+
+  <p>This is your first birthday as my husband… 💍</p>
+
+  <p>I don't just love you… I belong to you ❤️</p>
+
+  <!-- VIDEO -->
+  <p>🎥 My message for you:</p>
+  <video width="260" controls>
+    <source src="yourvideo.mp4" type="video/mp4">
+  </video>
+
+  <br><br>
+
+  <button onclick="love()">Click if you love me 😏</button>
+
+  <p id="loveMsg"></p>
+</div>
+
+<script>
+
+// Typing effect
+let text = "Simran... this is not just a birthday wish ❤️";
+let i = 0;
+
+function typing() {
+  if (i < text.length) {
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typing, 60);
+  }
+}
+typing();
+
+// Next screen
+function next1() {
+  document.getElementById("start").style.display = "none";
+  document.getElementById("lock").style.display = "block";
+}
+
+// Password check
+function check() {
+  let p = document.getElementById("pass").value;
+  if(p === "jass") {
+    document.getElementById("lock").style.display = "none";
+    document.getElementById("main").style.display = "block";
+    createHearts();
+  } else {
+    document.getElementById("error").innerText = "Wrong password 😢";
+  }
+}
+
+// Love button
+function love() {
+  document.getElementById("loveMsg").innerText =
+  "You are mine... today, tomorrow, forever ❤️ – Your Jass";
+}
+
+// Floating hearts
+function createHearts() {
+  setInterval(() => {
+    let heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerText = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 5000);
+  }, 300);
+}
+
+</script>
+
+</body>
+</html>
